@@ -1,7 +1,7 @@
 package com.template.common;
 
 public interface BaseResult {
-    Integer getCode();
+    int getCode();
 
     String getMsg();
 }

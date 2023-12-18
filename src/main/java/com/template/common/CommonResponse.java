@@ -7,6 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommonResponse {
-    Integer code;
-    String msg;
+    protected int code;
+    protected String msg;
 }

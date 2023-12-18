@@ -16,24 +16,24 @@ public class TestController {
     @RequestMapping(value = "/getTest1", method = RequestMethod.GET)
     public Response<?> getTest1(@RequestParam(value = "nickname", required = false) String name) {
         log.info("name=nickname={}", name);
-        return new Response<>().success();
+        return Response.success();
     }
 
     @RequestMapping(value = "/postTest1", method = RequestMethod.POST)
     public Response<?> postTest1(String userId) {
         log.info("userId={}", userId);
-        return new Response<>().fail(ResultEnum.ERROR);
+        return Response.fail(ResultEnum.ERROR);
     }
 
     @RequestMapping(value = "/postTest2", method = RequestMethod.POST)
     public Response<?> postTest2(QueryUserReq req) {
         log.info("QueryUserReq={}", req.getUserId());
-        return new Response<>().fail(new BusinessException(ResultEnum.ERROR));
+        return Response.fail(new BusinessException(ResultEnum.ERROR));
     }
 
     @RequestMapping(value = "/postTest3", method = RequestMethod.POST)
     public Response<?> postTest3(@RequestBody @Valid QueryUserReq req) {
         log.info("QueryUserReq={}", req.getUserId());
-        return new Response<>().success(req);
+        return Response.success(req);
     }
 }

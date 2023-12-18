@@ -1,5 +1,6 @@
 package com.template.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 @AllArgsConstructor
@@ -8,34 +9,35 @@ import lombok.*;
 @Setter
 public class Response<T> extends CommonResponse {
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
 
-    public Response success() {
-        Response<Object> oResponse = new Response<>();
-        oResponse.setCode(ResultEnum.SUCCESS.getCode());
-        oResponse.setMsg(ResultEnum.SUCCESS.getMsg());
-        return oResponse;
+    public static <T> Response<T> success() {
+        Response<T> response = new Response<>();
+        response.setCode(ResultEnum.SUCCESS.getCode());
+        response.setMsg(ResultEnum.SUCCESS.getMsg());
+        return response;
     }
 
-    public Response<T> success(T data) {
-        Response<T> tResponse = new Response<>();
-        tResponse.setData(data);
-        tResponse.setCode(ResultEnum.SUCCESS.getCode());
-        tResponse.setMsg(ResultEnum.SUCCESS.getMsg());
-        return tResponse;
+    public static <T> Response<T> success(T data) {
+        Response<T> response = new Response<>();
+        response.setData(data);
+        response.setCode(ResultEnum.SUCCESS.getCode());
+        response.setMsg(ResultEnum.SUCCESS.getMsg());
+        return response;
     }
 
-    public Response fail(BaseResult baseResult) {
-        Response<Object> oResponse = new Response<>();
-        oResponse.setCode(baseResult.getCode());
-        oResponse.setMsg(baseResult.getMsg());
-        return oResponse;
+    public static <T> Response<T> fail(BaseResult baseResult) {
+        Response<T> response = new Response<>();
+        response.setCode(baseResult.getCode());
+        response.setMsg(baseResult.getMsg());
+        return response;
     }
 
-    public Response fail(BusinessException e) {
-        Response<Object> oResponse = new Response<>();
-        oResponse.setCode(e.getCode());
-        oResponse.setMsg(e.getMessage());
-        return oResponse;
+    public static <T> Response<T> fail(BusinessException e) {
+        Response<T> response = new Response<>();
+        response.setCode(e.getCode());
+        response.setMsg(e.getMessage());
+        return response;
     }
 }
