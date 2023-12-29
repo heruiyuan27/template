@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public enum ResultEnum implements BaseResult {
+
     SUCCESS(0, "success"),
     ERROR(4000, "fail");
 
@@ -21,5 +22,6 @@ public enum ResultEnum implements BaseResult {
     public String getMsg() {
         return this.msg;
     }
+
 }
 
