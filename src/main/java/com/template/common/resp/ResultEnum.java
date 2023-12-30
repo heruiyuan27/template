@@ -1,4 +1,4 @@
-package com.template.common;
+package com.template.common.resp;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

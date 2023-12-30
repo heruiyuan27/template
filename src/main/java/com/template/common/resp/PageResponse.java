@@ -1,7 +1,6 @@
 package com.template.common.resp;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.template.common.ResultEnum;
 import com.template.common.vo.PageVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

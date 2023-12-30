@@ -1,6 +1,6 @@
 package com.template.common.exception;
 
-import com.template.common.BaseResult;
+import com.template.common.resp.BaseResult;
 import lombok.Getter;
 
 @Getter

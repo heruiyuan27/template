@@ -1,6 +1,6 @@
 package com.template.common.exception;
 
-import com.template.common.ResultEnum;
+import com.template.common.resp.ResultEnum;
 import com.template.common.resp.CommonResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -1,11 +1,8 @@
-/**
- * Description: Test01
- * Copyright: Copyright (c) 2023
- * Company: Ruijie Co., Ltd.
- * Create Time: 2023/12/15
- *
- * @author heruiyuan
- */
 public class ApplicationTest {
+
+    public static void main(String[] args) {
+        String path = System.getProperty("user.dir");
+        System.out.println(path);
+    }
 
 }

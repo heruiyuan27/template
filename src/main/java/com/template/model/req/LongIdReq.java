@@ -1,4 +1,4 @@
-package com.template.common.req;
+package com.template.model.req;
 
 import lombok.*;
 

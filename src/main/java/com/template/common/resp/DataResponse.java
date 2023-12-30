@@ -1,7 +1,6 @@
 package com.template.common.resp;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.template.common.ResultEnum;
 import lombok.Getter;
 import lombok.Setter;
 

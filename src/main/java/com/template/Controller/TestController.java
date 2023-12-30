@@ -1,9 +1,9 @@
 package com.template.Controller;
 
-import com.template.common.ResultEnum;
+import com.template.common.resp.ResultEnum;
 import com.template.common.exception.BusinessException;
-import com.template.common.req.LongIdReq;
-import com.template.common.req.StringIdReq;
+import com.template.model.req.LongIdReq;
+import com.template.model.req.StringIdReq;
 import com.template.common.resp.CommonResponse;
 import com.template.common.resp.DataResponse;
 import lombok.extern.slf4j.Slf4j;

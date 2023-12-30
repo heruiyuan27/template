@@ -1,7 +1,5 @@
 package com.template.common.resp;
 
-import com.template.common.BaseResult;
-import com.template.common.ResultEnum;
 import com.template.common.exception.BusinessException;
 import lombok.Getter;
 import lombok.Setter;
