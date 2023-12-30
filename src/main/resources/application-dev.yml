@@ -5,6 +5,16 @@ spring:
     username: root
     password: 123456
 
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: -1
+      max-request-size: -1
+
 knife4j:
   enable: true
   production: false
@@ -14,4 +24,7 @@ logging:
     com.template: debug
 
 file:
-  save-path:
+  mode: local
+  local:
+    save: C:\Users\Hery\Desktop\Github\template\src\main\resources\upload
+

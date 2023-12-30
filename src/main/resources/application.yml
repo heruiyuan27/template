@@ -2,16 +2,6 @@ spring:
   profiles:
     active: dev
 
-  jackson:
-    serialization:
-      write-dates-as-timestamps: true
-
-  servlet:
-    multipart:
-      enabled: true
-      max-file-size: -1
-      max-request-size: -1
-
 server:
   port: 8080
   servlet:
