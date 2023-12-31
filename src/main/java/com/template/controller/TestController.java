@@ -1,4 +1,4 @@
-package com.template.Controller;
+package com.template.controller;
 
 import com.template.common.resp.ResultEnum;
 import com.template.common.exception.BusinessException;

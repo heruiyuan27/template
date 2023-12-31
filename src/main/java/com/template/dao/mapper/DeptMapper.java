@@ -1,6 +1,6 @@
 package com.template.dao.mapper;
 
-import com.template.model.entity.Dept;
+import com.template.model.entity.DeptEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2023-12-30 11:29:22
  */
 @Mapper
-public interface DeptMapper extends BaseMapper<Dept> {
+public interface DeptMapper extends BaseMapper<DeptEntity> {
 
 }

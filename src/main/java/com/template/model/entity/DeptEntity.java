@@ -23,7 +23,7 @@ import java.util.Date;
 @NoArgsConstructor
 @TableName("dept")
 @Schema(name = "Dept", description = "部门表")
-public class Dept {
+public class DeptEntity {
 
     @Schema(description = "自增ID")
     @TableId(value = "id", type = IdType.AUTO)
@@ -47,5 +47,5 @@ public class Dept {
 
     @Schema(description = "是否逻辑删除")
     @TableField(value = "deleted", fill = FieldFill.INSERT)
-    private Boolean deleted;
+    private Integer deleted;
 }

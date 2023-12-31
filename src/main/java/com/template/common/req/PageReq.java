@@ -16,5 +16,5 @@ public class PageReq {
     @Schema(description = "排序字段")
     protected String orderBy;
     @Schema(description = "排序顺序，true为升序，false为降序")
-    protected boolean asc;
+    protected Boolean asc;
 }
