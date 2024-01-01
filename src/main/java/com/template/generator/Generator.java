@@ -1,4 +1,4 @@
-package com.template.utils;
+package com.template.generator;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
@@ -18,7 +18,7 @@ public class Generator {
         String url = "jdbc:mysql://localhost:3306/java?useSSL=false";
         String username = "root";
         String password = "123456";
-        String table_to_generate = "user";
+        String table_to_generate = "employee";
         // 数据库配置(DataSourceConfig)
         FastAutoGenerator.create(new DataSourceConfig.Builder(url, username, password)
                         .dbQuery(new MySqlQuery()))
