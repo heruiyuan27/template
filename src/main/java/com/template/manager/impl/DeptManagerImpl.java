@@ -16,6 +16,9 @@ import java.util.Objects;
 @Manager
 @Slf4j
 public class DeptManagerImpl implements DeptManager {
+
+    public static final Integer NOT_DELETED = 0;
+
     @Resource
     private DeptMapper deptMapper;
 
@@ -25,7 +28,9 @@ public class DeptManagerImpl implements DeptManager {
         LambdaQueryWrapper<DeptEntity> qw = new LambdaQueryWrapper<>();
         qw.le(Objects.nonNull(req.getEndTime()), DeptEntity::getCreateTime, req.getEndTime())
                 .ge(Objects.nonNull(req.getStartTime()), DeptEntity::getCreateTime, req.getStartTime())
-                .eq(DeptEntity::getDeleted, 0);
+                .eq(DeptEntity::getDeleted, NOT_DELETED)
+                .orderByDesc(DeptEntity::getCreateTime)
+                .orderByDesc(DeptEntity::getId);
         deptMapper.selectPage(page, qw);
         return page;
     }
