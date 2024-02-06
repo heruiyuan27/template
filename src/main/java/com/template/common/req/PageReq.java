@@ -13,8 +13,8 @@ public class PageReq {
     protected long currentPage;
     @Schema(description = "每页数量")
     protected long pageSize;
-    @Schema(description = "排序字段")
+    @Schema(description = "排序字段，默认不传")
     protected String orderBy;
-    @Schema(description = "排序顺序，true为升序，false为降序")
+    @Schema(description = "排序顺序，true为升序，false为降序，默认不传")
     protected Boolean asc;
 }

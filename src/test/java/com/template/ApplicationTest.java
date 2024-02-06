@@ -1,5 +1,7 @@
 package com.template;
 
+import com.template.common.exception.BusinessException;
+import com.template.common.resp.ResultEnum;
 import com.template.dao.mapper.EmployeeMapper;
 import com.template.model.entity.EmployeeEntity;
 import com.template.model.vo.EmployeeVO;
@@ -42,5 +44,10 @@ public class ApplicationTest {
         }
     }
 
-
+    @Test
+    public void businessException(){
+        String param1 = "amy";
+        Integer param2 = 10;
+        throw new BusinessException(ResultEnum.PARAM_ERROR_TEMPLATE,param1,param2);
+    }
 }
