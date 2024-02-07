@@ -15,10 +15,6 @@ spring:
       max-file-size: -1
       max-request-size: -1
 
-knife4j:
-  enable: true
-  production: false
-
 logging:
   level:
     com.template: debug
@@ -26,5 +22,6 @@ logging:
 file:
   mode: local
   local:
-    save: C:\Users\Hery\Desktop\Github\template\src\main\resources\upload
+    cache: C:\Users\Hery\Desktop\cache
+    save: C:\Users\Hery\Desktop\upload
 

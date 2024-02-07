@@ -9,7 +9,7 @@ public enum ResultEnum implements BaseResult {
 
     SUCCESS(0, "success"),
     ERROR(4000, "fail"),
-    PARAM_ERROR_TEMPLATE(4001, "name:{0},age:{1},error");
+    MKDIRS_SAVEDIR_ERROR(4001, "上传文件存储路径{}构建失败");
 
     private int code;
     private String msg;
