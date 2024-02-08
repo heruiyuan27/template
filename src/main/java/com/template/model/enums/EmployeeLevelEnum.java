@@ -1,5 +1,6 @@
 package com.template.model.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.Getter;
 
 /**
@@ -17,7 +18,9 @@ public enum EmployeeLevelEnum {
     T7("T-7", "架构师"),
     T8("T-8", "架构师");
 
+    @EnumValue
     private final String level;
+
     private final String title;
 
     EmployeeLevelEnum(String level, String title) {

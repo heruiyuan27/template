@@ -1,11 +1,13 @@
 package com.template.dao.mapper;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.template.model.entity.EmployeeEntity;
+import com.template.model.req.QueryEmployeeReq;
 import com.template.model.vo.EmployeeVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -20,6 +22,5 @@ public interface EmployeeMapper {
 
     void insertEmployee(EmployeeEntity entity);
 
-    List<EmployeeVO> pageQueryEmployee(Map<String, Integer> map);
-
+    List<EmployeeVO> pageQueryEmployee(Page<EmployeeVO> page, @Param("req") QueryEmployeeReq req);
 }

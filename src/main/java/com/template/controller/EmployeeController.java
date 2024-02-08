@@ -2,7 +2,11 @@ package com.template.controller;
 
 
 import com.template.common.resp.CommonResponse;
+import com.template.common.resp.PageResponse;
+import com.template.common.vo.PageVO;
 import com.template.model.req.AddEmployeeReq;
+import com.template.model.req.QueryEmployeeReq;
+import com.template.model.vo.EmployeeVO;
 import com.template.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,10 +30,9 @@ public class EmployeeController {
         return CommonResponse.success();
     }
 
-//    @RequestMapping(value = "/query", method = RequestMethod.POST)
-//    public PageResponse<?> pageQuery(@RequestBody QueryDeptReq req) {
-//        PageVO<?> pageVO = deptService.pageQuery(req);
-//        return PageResponse.success(pageVO);
-//    }
-
+    @RequestMapping(value = "/query", method = RequestMethod.POST)
+    public PageResponse<EmployeeVO> pageQuery(@RequestBody QueryEmployeeReq req) {
+        PageVO<EmployeeVO> pageVO = employeeService.pageQueryEmployee(req);
+        return PageResponse.success(pageVO);
+    }
 }

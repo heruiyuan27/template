@@ -32,7 +32,7 @@
                 #{level}, #{title})
     </insert>
 
-    <select id="pageQueryEmployee" parameterType="map" resultMap="VOResultMap">
+    <select id="pageQueryEmployee" parameterType="com.template.model.req.QueryEmployeeReq" resultMap="VOResultMap">
         SELECT e.employee_id,
                e.employee_nickname,
                e.employee_head,
@@ -42,7 +42,18 @@
         FROM employee e
                  LEFT JOIN dept d
                            ON e.dept_id = d.dept_id
-            LIMIT #{startIndex}
-           , #{pageSize};
+        <where>
+            <if test="req.deptId != null and req.deptId != ''">
+                AND e.dept_id = #{req.deptId}
+            </if>
+            <if test="req.levelEnumList!=null and req.levelEnumList.size() > 0">
+                AND e.level IN
+                <foreach collection="req.levelEnumList" item="item" index="index"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+        ORDER BY e.create_time DESC,e.id DESC
     </select>
 </mapper>
