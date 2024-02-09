@@ -2,12 +2,15 @@ package com.template.strategy;
 
 import com.template.common.exception.BusinessException;
 import com.template.common.resp.ResultEnum;
+import com.template.dao.mapper.FileMapper;
+import com.template.model.entity.FileEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -22,6 +25,9 @@ public class LocalFileStrategy implements FileStrategy {
 
     @Value("${file.local.save}")
     public String CACHE_DIR;
+
+    @Resource
+    private FileMapper fileMapper;
 
     @Override
     public void batchUpload(MultipartFile[] fileArr) {
@@ -41,6 +47,11 @@ public class LocalFileStrategy implements FileStrategy {
             File targetFile = new File(SAVE_DIR + File.separator + fileSaveName);
             try {
                 file.transferTo(targetFile);
+                fileMapper.insert(FileEntity.builder()
+                        .fileId(uuid.toString())
+                        .fileName(originalFileName)
+                        .fileSize(file.getSize())
+                        .build());
                 log.info("保存文件{}到{}成功", fileSaveName, SAVE_DIR);
             } catch (IOException e) {
                 log.error("保存文件{}到{}失败", fileSaveName, SAVE_DIR);
