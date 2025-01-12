@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+ 
+<input type="text" id="msg">
+<button id="sendBtn" onclick="sendClick()">发送</button>
+<button id="closeBtn"  onclick="closeWebsocket()">关闭</button>
+<div id="message">
+</div>
+        
+        
+    </body>
+    
+    <script type="text/javascript">
+        var ws = null;
+    if ('WebSocket' in window){
+        ws = new WebSocket("ws://127.0.0.1:8080/test")
+    }else {
+        alert("浏览器不支持");
+    }
+    var connBtn = document.getElementById("connBtn");
+    var sendBtn = document.getElementById("sendBtn");
+    var closeBtn = document.getElementById("closeBtn");
+ 
+    // 连接安生错误的回调方法
+    ws.onerror = function () {
+        setMessageInnerHTML("WEBSOCKET发生链接错误");
+    }
+ 
+    // 连接成功的回调方法
+    ws.onopen = function (ev) {
+        setMessageInnerHTML("WebSocket连接成功！");
+        let sendObject={
+    		data:"",
+    		sendUserId:"2",//当前用户id
+    		cmd:"20001"//身份验证
+    	}
+    	send(sendObject);
+    }
+ 
+    // 收到消息的回调方法
+    ws.onmessage = function (ev) {
+        setMessageInnerHTML(ev.data);
+        
+    }
+ 
+    // 连接关闭的回调方法
+    ws.onclose = function () {
+        setMessageInnerHTML("WebSocket连接关闭");
+    }
+ 
+ 
+    // 监听窗口关闭事件，防止连接没断关闭窗口。
+    window.onbeforeunload = function () {
+        closeWebSocket();
+    }
+ 
+ 
+    // 将消息显示在网页上
+    function setMessageInnerHTML(innerHtml){
+        document.getElementById("message").innerHTML += innerHtml + '<br />'
+    }
+ 
+    // 关闭websocket连接
+    function closeWebsocket(){
+        ws.close();
+    }
+    function sendClick(){
+    	var message = document.getElementById("msg").value;
+    	let sendObject={
+    		data:message,//消息内容
+    		sendType:"3",//发送消息
+    		toUser:"1",
+    		messageType:"1"//单发
+    	}
+    	send(sendObject);
+    }
+ 
+    // 发送消息
+    function send(sendObject){
+        ws.send(JSON.stringify(sendObject));
+    }
+    
+    </script>
+</html>
