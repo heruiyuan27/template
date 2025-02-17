@@ -9,6 +9,7 @@ import com.template.common.resp.ResultEnum;
 import com.template.model.Student;
 import com.template.model.req.LongIdReq;
 import com.template.model.req.StringIdReq;
+import com.template.service.AsyncService;
 import com.template.service.RedisCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,9 @@ public class TestController {
 
     @Resource
     private RedisCache redisCache;
+
+    @Resource
+    private AsyncService asyncService;
 
     @RequestMapping(value = "/getTest1", method = RequestMethod.GET)
     public CommonResponse getTest1(@RequestParam(value = "nickname", required = false) String name) {
@@ -70,6 +74,13 @@ public class TestController {
                 .map(o -> JSON.toJavaObject(o, Student.class))
                 .collect(Collectors.toList());
         return DataResponse.success(result);
+    }
+
+    @GetMapping(value = "/async")
+    public CommonResponse async() {
+        log.info("Controller:" + Thread.currentThread().getName());
+        asyncService.async();
+        return CommonResponse.success();
     }
 
 }
