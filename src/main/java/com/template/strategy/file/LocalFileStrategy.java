@@ -1,4 +1,4 @@
-package com.template.strategy;
+package com.template.strategy.file;
 
 import com.template.common.exception.BusinessException;
 import com.template.common.resp.ResultEnum;

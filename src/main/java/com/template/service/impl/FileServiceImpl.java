@@ -5,7 +5,7 @@ import com.template.dao.mapper.FileMapper;
 import com.template.model.entity.FileEntity;
 import com.template.model.req.StringIdListReq;
 import com.template.service.FileService;
-import com.template.strategy.FileStrategy;
+import com.template.strategy.file.FileStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;

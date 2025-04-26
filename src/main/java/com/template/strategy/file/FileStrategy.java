@@ -1,4 +1,4 @@
-package com.template.strategy;
+package com.template.strategy.file;
 
 import com.template.model.entity.FileEntity;
 import org.springframework.web.multipart.MultipartFile;
