@@ -1,10 +1,10 @@
 package com.template.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.template.common.utils.PageUtil;
 import com.template.common.vo.PageVO;
 import com.template.dao.mapper.DeptMapper;
-import com.template.manager.DeptManager;
 import com.template.model.entity.DeptEntity;
 import com.template.model.req.AddDeptReq;
 import com.template.model.req.QueryDeptReq;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -23,8 +24,7 @@ public class DeptServiceImpl implements DeptService {
     @Resource
     private DeptMapper deptMapper;
 
-    @Resource
-    private DeptManager deptManager;
+    public static final Integer NOT_DELETED = 0;
 
     @Override
     public void addDept(AddDeptReq req) {
@@ -36,8 +36,16 @@ public class DeptServiceImpl implements DeptService {
 
     @Override
     public PageVO<DeptVO> pageQuery(QueryDeptReq req) {
-        Page<DeptEntity> pageEntity = deptManager.page(req);
-        List<DeptVO> DeptVOList = pageEntity.getRecords().stream().map(deptEntity -> {
+        Page<DeptEntity> page = PageUtil.createPage(req);
+        LambdaQueryWrapper<DeptEntity> qw = new LambdaQueryWrapper<>();
+        qw.le(Objects.nonNull(req.getEndTime()), DeptEntity::getCreateTime, req.getEndTime())
+                .ge(Objects.nonNull(req.getStartTime()), DeptEntity::getCreateTime, req.getStartTime())
+                .eq(DeptEntity::getDeleted, NOT_DELETED)
+                .orderByDesc(DeptEntity::getCreateTime)
+                .orderByDesc(DeptEntity::getId);
+        deptMapper.selectPage(page, qw);
+
+        List<DeptVO> deptVOList = page.getRecords().stream().map(deptEntity -> {
             DeptVO deptVO = new DeptVO();
             deptVO.setDeptId(deptEntity.getDeptId());
             deptVO.setDeptName(deptEntity.getDeptName());
@@ -46,8 +54,8 @@ public class DeptServiceImpl implements DeptService {
             return deptVO;
         }).collect(Collectors.toList());
 
-        PageVO<DeptVO> pageVO = PageUtil.createPageVO(pageEntity);
-        pageVO.setData(DeptVOList);
+        PageVO<DeptVO> pageVO = PageUtil.createPageVO(page);
+        pageVO.setData(deptVOList);
         return pageVO;
     }
 
