@@ -10,7 +10,7 @@ import com.template.model.pojo.Student;
 import com.template.model.req.LongIdReq;
 import com.template.model.req.StringIdReq;
 import com.template.service.AsyncService;
-import com.template.common.utils.RedisCache;
+import com.template.service.RedisCacheService;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -28,13 +28,13 @@ import java.util.stream.Collectors;
 public class TestController {
 
     @Resource
-    private RedisCache redisCache;
+    private RedisCacheService redisCacheService;
 
     @Resource
     private AsyncService asyncService;
 
     @Resource
-    private RedissonClient redisson;
+    private RedissonClient redissonClient;
 
     @RequestMapping(value = "/getTest1", method = RequestMethod.GET)
     public CommonResponse getTest1(@RequestParam(value = "nickname", required = false) String name) {
@@ -69,13 +69,13 @@ public class TestController {
         list.add(s1);
         list.add(s2);
         list.add(s3);
-        long count = redisCache.setCacheList("list_key", list);
+        long count = redisCacheService.setCacheList("list_key", list);
         return DataResponse.success(count);
     }
 
     @RequestMapping(value = "/redisListGet", method = RequestMethod.GET)
     public DataResponse<?> redisListGet() {
-        List<JSONObject> list = redisCache.getCacheList("list_key");
+        List<JSONObject> list = redisCacheService.getCacheList("list_key");
         List<Student> result = list.stream()
                 .map(o -> JSON.toJavaObject(o, Student.class))
                 .collect(Collectors.toList());
@@ -95,15 +95,15 @@ public class TestController {
 
     @GetMapping(value = "/redissonLock")
     public CommonResponse redissonLock() {
-        RLock lock = redisson.getLock(LOCK_KEY);
+        RLock lock = redissonClient.getLock(LOCK_KEY);
         try {
             lock.lock();
-            Object cacheObject = redisCache.getCacheObject(PRODUCT_KEY);
+            Object cacheObject = redisCacheService.getCacheObject(PRODUCT_KEY);
             int left = Integer.parseInt(cacheObject.toString());
             if (left > 0) {
                 left--;
                 System.out.printf("秒杀商品个数剩余：" + left + "\n");
-                redisCache.setCacheObject(PRODUCT_KEY, left, 30, TimeUnit.MINUTES);
+                redisCacheService.setCacheObject(PRODUCT_KEY, left, 30, TimeUnit.MINUTES);
             } else {
                 System.out.println("活动太火爆了，商品已经被抢购一空了！");
             }
@@ -116,9 +116,9 @@ public class TestController {
         }
     }
 
-    @GetMapping("/init")
-    public CommonResponse init() {
-        redisCache.setCacheObject(PRODUCT_KEY, PRODUCT_SIZE, 5, TimeUnit.MINUTES);
+    @GetMapping("/initProduct")
+    public CommonResponse initProduct() {
+        redisCacheService.setCacheObject(PRODUCT_KEY, PRODUCT_SIZE, 5, TimeUnit.MINUTES);
         return CommonResponse.success();
     }
 

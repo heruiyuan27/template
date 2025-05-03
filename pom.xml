@@ -126,11 +126,16 @@
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
-            <version>3.22.0</version>
+            <version>3.13.6</version>
         </dependency>
 
-
-
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-bom</artifactId>
+            <version>4.1.68.Final</version> <!-- 使用最新的稳定版本 -->
+            <scope>import</scope>
+            <type>pom</type>
+        </dependency>
     </dependencies>
 
     <build>

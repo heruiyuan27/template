@@ -1,11 +1,11 @@
-package com.template.common.utils;
+package com.template.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -14,8 +14,8 @@ import java.util.concurrent.TimeUnit;
  * 对Redis工具类redisTemplate的进一步封装
  **/
 @SuppressWarnings(value = { "unchecked", "rawtypes" })
-@Component
-public class RedisCache
+@Service
+public class RedisCacheService
 {
     @Autowired
     public RedisTemplate redisTemplate;
