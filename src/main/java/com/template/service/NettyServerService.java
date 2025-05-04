@@ -10,6 +10,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import io.netty.channel.*;
 import io.netty.channel.socket.SocketChannel;
@@ -19,12 +20,18 @@ import javax.annotation.PostConstruct;
 
 @Service
 @Slf4j
-public class NettyServerService {
+public class NettyServerService implements Runnable {
 
-    public static final int TCP_PORT = 9201;
+    @Value("${netty.port}")
+    private int port;
 
     @PostConstruct
     public void init() {
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run() {
         try {
             startNettyServer();
         } catch (Exception e) {
@@ -88,8 +95,8 @@ public class NettyServerService {
                     .childOption(ChannelOption.SO_KEEPALIVE, true); // 保持长连接
 
             // 绑定端口并启动服务
-            ChannelFuture f = b.bind(TCP_PORT).sync();
-            log.warn("服务器启动成功，监听端口: " + TCP_PORT);
+            ChannelFuture f = b.bind(port).sync();
+            log.warn("服务器启动成功，监听端口: " + port);
 
             // 等待服务器通道关闭
             f.channel().closeFuture().sync();
@@ -101,6 +108,5 @@ public class NettyServerService {
 
 
     }
-
 
 }
