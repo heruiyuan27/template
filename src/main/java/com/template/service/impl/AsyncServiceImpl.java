@@ -12,6 +12,6 @@ public class AsyncServiceImpl implements AsyncService {
     @Override
     @Async
     public void async() {
-        log.info("Service:"+Thread.currentThread().getName());
+        log.info("Service:{}", Thread.currentThread().getName());
     }
 }

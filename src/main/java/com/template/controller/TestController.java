@@ -50,14 +50,14 @@ public class TestController {
 
     @RequestMapping(value = "/postTest2", method = RequestMethod.POST)
     public CommonResponse postTest2(LongIdReq req) {
-        log.info("QueryUserReq={}", req.getId());
+        log.info("userId={}", req.getId());
         return CommonResponse.fail(new BusinessException(ResultEnum.ERROR));
     }
 
     @RequestMapping(value = "/postTest3", method = RequestMethod.POST)
-    public DataResponse<StringIdReq> postTest3(@RequestBody @Valid StringIdReq req) {
-        log.info("QueryUserReq={}", req.getId());
-        return DataResponse.success(req);
+    public DataResponse<String> postTest3(@RequestBody @Valid StringIdReq req) {
+        log.info("userId={}", req.getId());
+        return DataResponse.success("postTest3");
     }
 
     @RequestMapping(value = "/redisListPush", method = RequestMethod.GET)
@@ -84,7 +84,7 @@ public class TestController {
 
     @GetMapping(value = "/async")
     public CommonResponse async() {
-        log.info("Controller:" + Thread.currentThread().getName());
+        log.info("Controller:{}", Thread.currentThread().getName());
         asyncService.async();
         return CommonResponse.success();
     }

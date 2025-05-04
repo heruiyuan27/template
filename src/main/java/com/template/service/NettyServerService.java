@@ -54,31 +54,31 @@ public class NettyServerService {
                                 @Override
                                 protected void channelRead0(ChannelHandlerContext ctx, String msg) {
                                     // 打印接收到的消息
-                                    System.out.println("收到客户端 [" + ctx.channel().remoteAddress() + "] 的消息: " + msg);
+                                    log.warn("收到客户端 [" + ctx.channel().remoteAddress() + "] 的消息: " + msg);
 
                                     // 构造回复消息
                                     String response = "服务器已收到您的消息: " + msg;
 
                                     // 发送回复
                                     ctx.writeAndFlush(response);
-                                    System.out.println("已回复客户端: " + response);
+                                    log.warn("已回复客户端: " + response);
                                 }
 
                                 @Override
                                 public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                                    System.out.println("客户端连接建立: " + ctx.channel().remoteAddress());
+                                    log.warn("客户端连接建立: " + ctx.channel().remoteAddress());
                                     super.channelActive(ctx);
                                 }
 
                                 @Override
                                 public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-                                    System.out.println("客户端连接断开: " + ctx.channel().remoteAddress());
+                                    log.warn("客户端连接断开: " + ctx.channel().remoteAddress());
                                     super.channelInactive(ctx);
                                 }
 
                                 @Override
                                 public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-                                    System.out.println("处理客户端 [" + ctx.channel().remoteAddress() + "] 时发生异常: " + cause.getMessage());
+                                    log.warn("处理客户端 [" + ctx.channel().remoteAddress() + "] 时发生异常: " + cause.getMessage());
                                     ctx.close();
                                 }
                             });
@@ -89,14 +89,14 @@ public class NettyServerService {
 
             // 绑定端口并启动服务
             ChannelFuture f = b.bind(TCP_PORT).sync();
-            System.out.println("服务器启动成功，监听端口: " + TCP_PORT);
+            log.warn("服务器启动成功，监听端口: " + TCP_PORT);
 
             // 等待服务器通道关闭
             f.channel().closeFuture().sync();
         } finally {
             workerGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
-            System.out.println("服务器已关闭");
+            log.warn("服务器已关闭");
         }
 
 
