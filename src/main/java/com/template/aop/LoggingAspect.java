@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LoggingAspect {
+
     private final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
     // 定义切入点

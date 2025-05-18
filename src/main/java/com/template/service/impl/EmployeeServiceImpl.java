@@ -3,7 +3,7 @@ package com.template.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.template.common.utils.PageUtil;
 import com.template.common.vo.PageVO;
-import com.template.dao.mapper.EmployeeMapper;
+import com.template.mapper.EmployeeMapper;
 import com.template.model.entity.EmployeeEntity;
 import com.template.model.req.AddEmployeeReq;
 import com.template.model.req.QueryEmployeeReq;

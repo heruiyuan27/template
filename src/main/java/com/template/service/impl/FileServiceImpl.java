@@ -1,7 +1,7 @@
 package com.template.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.template.dao.mapper.FileMapper;
+import com.template.mapper.FileMapper;
 import com.template.model.entity.FileEntity;
 import com.template.model.req.StringIdListReq;
 import com.template.service.FileService;

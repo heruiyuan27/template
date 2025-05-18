@@ -1,4 +1,4 @@
-package com.template.dao.mapper;
+package com.template.mapper;
 
 import com.template.model.entity.DeptEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

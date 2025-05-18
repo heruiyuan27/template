@@ -12,15 +12,12 @@ import com.template.model.req.StringIdReq;
 import com.template.service.AsyncService;
 import com.template.service.RedisCacheService;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -33,8 +30,8 @@ public class TestController {
     @Resource
     private AsyncService asyncService;
 
-    @Resource
-    private RedissonClient redissonClient;
+//    @Resource
+//    private RedissonClient redissonClient;
 
     @RequestMapping(value = "/getTest1", method = RequestMethod.GET)
     public CommonResponse getTest1(@RequestParam(value = "nickname", required = false) String name) {
@@ -89,37 +86,37 @@ public class TestController {
         return CommonResponse.success();
     }
 
-    private static final String PRODUCT_KEY = "test:product";
-    private static final Integer PRODUCT_SIZE = 10;
-    private static final String LOCK_KEY = "lock";
-
-    @GetMapping(value = "/redissonLock")
-    public CommonResponse redissonLock() {
-        RLock lock = redissonClient.getLock(LOCK_KEY);
-        try {
-            lock.lock();
-            Object cacheObject = redisCacheService.getCacheObject(PRODUCT_KEY);
-            int left = Integer.parseInt(cacheObject.toString());
-            if (left > 0) {
-                left--;
-                System.out.printf("秒杀商品个数剩余：" + left + "\n");
-                redisCacheService.setCacheObject(PRODUCT_KEY, left, 30, TimeUnit.MINUTES);
-            } else {
-                System.out.println("活动太火爆了，商品已经被抢购一空了！");
-            }
-            return CommonResponse.success();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return CommonResponse.success();
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    @GetMapping("/initProduct")
-    public CommonResponse initProduct() {
-        redisCacheService.setCacheObject(PRODUCT_KEY, PRODUCT_SIZE, 5, TimeUnit.MINUTES);
-        return CommonResponse.success();
-    }
+//    private static final String PRODUCT_KEY = "test:product";
+//    private static final Integer PRODUCT_SIZE = 10;
+//    private static final String LOCK_KEY = "lock";
+//
+//    @GetMapping(value = "/redissonLock")
+//    public CommonResponse redissonLock() {
+//        RLock lock = redissonClient.getLock(LOCK_KEY);
+//        try {
+//            lock.lock();
+//            Object cacheObject = redisCacheService.getCacheObject(PRODUCT_KEY);
+//            int left = Integer.parseInt(cacheObject.toString());
+//            if (left > 0) {
+//                left--;
+//                System.out.printf("秒杀商品个数剩余：" + left + "\n");
+//                redisCacheService.setCacheObject(PRODUCT_KEY, left, 30, TimeUnit.MINUTES);
+//            } else {
+//                System.out.println("活动太火爆了，商品已经被抢购一空了！");
+//            }
+//            return CommonResponse.success();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return CommonResponse.success();
+//        } finally {
+//            lock.unlock();
+//        }
+//    }
+//
+//    @GetMapping("/initProduct")
+//    public CommonResponse initProduct() {
+//        redisCacheService.setCacheObject(PRODUCT_KEY, PRODUCT_SIZE, 5, TimeUnit.MINUTES);
+//        return CommonResponse.success();
+//    }
 
 }

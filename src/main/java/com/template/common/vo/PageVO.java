@@ -17,6 +17,6 @@ public class PageVO<T> {
     private long total;
     @Schema(description = "总页数")
     private long totalPage;
-
+    @Schema(description = "数据列表")
     private List<T> data;
 }

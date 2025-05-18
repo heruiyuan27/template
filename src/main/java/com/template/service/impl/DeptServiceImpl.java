@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.template.common.utils.PageUtil;
 import com.template.common.vo.PageVO;
-import com.template.dao.mapper.DeptMapper;
+import com.template.mapper.DeptMapper;
 import com.template.model.entity.DeptEntity;
 import com.template.model.req.AddDeptReq;
 import com.template.model.req.QueryDeptReq;

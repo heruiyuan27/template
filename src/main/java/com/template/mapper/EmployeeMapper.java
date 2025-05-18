@@ -1,4 +1,4 @@
-package com.template.dao.mapper;
+package com.template.mapper;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.template.model.entity.EmployeeEntity;
