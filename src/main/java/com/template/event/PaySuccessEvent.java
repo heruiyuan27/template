@@ -10,7 +10,7 @@ public class PaySuccessEvent extends ApplicationEvent {
 
     private String msg;
 
-    public PaySuccessEvent(Object source ,String msg) {
+    public PaySuccessEvent(Object source, String msg) {
         super(source);
         this.msg = msg;
     }

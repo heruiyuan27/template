@@ -15,6 +15,7 @@ public class PageUtil {
 
     public static <T> Page<T> createPage(PageReq req, boolean searchCount) {
         Page<T> page = Page.of(req.getCurrentPage(), req.getPageSize(), searchCount);
+        // 模拟前端根据某个字段排序的情况，事实上也可以是多个
         if (StringUtils.isNotBlank(req.getOrderBy()) && req.getAsc() != null) {
             OrderItem orderItem = new OrderItem();
             orderItem.setColumn(PageUtil.humpToUnderline(req.getOrderBy()));

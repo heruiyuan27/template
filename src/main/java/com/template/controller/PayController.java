@@ -33,7 +33,7 @@ public class PayController {
 
     @RequestMapping(value = "/paySuccess", method = RequestMethod.GET)
     public CommonResponse paySuccess() {
-        applicationEventPublisher.publishEvent(new PaySuccessEvent(this,"小明支付成功"));
+        applicationEventPublisher.publishEvent(new PaySuccessEvent(this, "小明支付成功"));
         return CommonResponse.success();
     }
 
