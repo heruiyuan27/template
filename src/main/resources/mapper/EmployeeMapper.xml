@@ -61,7 +61,7 @@
             <if test="req.deptId != null and req.deptId != ''">
                 AND e.dept_id = #{req.deptId}
             </if>
-            <if test="req.levelEnumList!=null and req.levelEnumList.size() > 0">
+            <if test="req.levelEnumList != null and req.levelEnumList.size() > 0">
                 AND e.level IN
                 <foreach collection="req.levelEnumList" item="item" index="index"
                          open="(" separator="," close=")">
